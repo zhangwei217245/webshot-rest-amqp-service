@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+var debug = require('debug')('webshot-rest-amqp-service');
+//var config = require('config');
+var app = require('../app');
+
+app.set('port', process.env.PORT || app.cfg().httpserver.port);
+
+var server = app.listen(app.get('port'), function() {
+  message='Express server listening on port ' + server.address().port;
+  debug(message);
+  console.log(message);
+});

@@ -1,0 +1,40 @@
+httpserver:
+  port: 3000
+amqp:
+  credentials:
+    host: '10.6.10.143'
+    port: 5672
+    login: 'guest'
+    password: 'guest'
+    connectionTimeout: 10000
+    vhost: '/'
+  consumer:
+    exchangeName: 'webshot.exchange'
+    queueName: 'webshot'
+    routingKey: 'webshot'
+webshot:
+  localTmp: '/tmp/webshot/'
+  proto:
+    windowSize:
+      width: 1024
+      height: 768
+    shotSize:
+      width: 'all'
+      height: 'all'
+    shotOffset:
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+    defaultWhiteBackground: false
+    quality: 75
+    streamType: 'png'
+    siteType: 'url'
+    renderDelay: 0
+    timeout: 0
+upyun:
+  bucketname: 'ys-ricebook'
+  username: 'zhangwei'
+  password: 'zhangwei13'
+  resroot: '/test/'
+  domain: 'http://test.img.seriousapps.cn'
