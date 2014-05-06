@@ -31,7 +31,9 @@
         "amqp": "0.2.0",
         "webshot": "0.13.0",
         "node-uuid": "1.4.1",
-        "upyun-official": "0.14.5"
+        "upyun-official": "0.14.5",
+        "weibo": "0.6.11",
+        "q": "1.0.1"
     },
     "description": "A nodejs project for capturing the snapshot for any specified website according to the message received from amqp implementation like rabbitmq."
 }

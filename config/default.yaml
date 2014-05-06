@@ -33,8 +33,19 @@ webshot:
     renderDelay: 0
     timeout: 0
 upyun:
-  bucketname: 'ys-ricebook'
+  bucketname: 'ys-rsbook'
   username: 'zhangwei'
   password: 'zhangwei13'
   resroot: '/test/'
   domain: 'http://test.img.seriousapps.cn'
+sns_platform:
+  -
+    type: 'weibo'
+    app_key: '1852823608'
+    app_secret: 'f7623417c5fbe029dd366e4e01e34e48'
+    oauth_callback_url: 'http://asdfsdf.com/ss'
+  -
+    type: 'tqq'
+    app_key: '801503676'
+    app_secret: '4fe89516aa3ad2d545866c129aada22e'
+    oauth_callback_url: 'http://www.credentialsapp.com/example'

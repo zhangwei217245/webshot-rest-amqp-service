@@ -42,12 +42,16 @@ var config = {
 };
 
 
+var wbShot = null;
 
 router.setconfig = function(cfg) {
-    config = cfg;
+    if (cfg) {
+        config = cfg;
+        wbShot = new WebshotProxy(cfg);
+    } else {
+        wbShot = new WebshotProxy(config);
+    }
 }
-
-var wbShot = new WebshotProxy(config);
 
 
 /* GET take a shot for the web page and send stream as response. */
@@ -68,15 +72,59 @@ router.get('/shot2cloud', function(req, res) {
     vendor = req.param('vendor');
     force = req.param('force');
 
+//    wbShot.checkAndLoadFromCloud(url,vendor);
 
-    wbShot.shot2Cloud(url, vendor, force, function(metadata, data){
-        console.log('do sth...')
-    });
+    try{
+        wbShot.shot2Cloud(url, vendor, force, function(metadata, data){
+            console.log('do sth...')
+        });
+    }catch(err){
+        res.type('text/plain').send(400, err.message);
+
+        throw err;
+    }
+
+
 
     wbShot.once('cloudResponse', function(metadata){
         res.type(metadata.type).send(metadata.httpCode, metadata.httpMsg);
     });
+    wbShot.once('cloudError', function(metadata){
+        res.type(metadata.type).send(metadata.httpCode, metadata.httpMsg);
+    });
 
+});
+
+router.get('/shot2SNS', function(req, res){
+    url = req.param('url');
+    usr = req.param('usr');
+
+    user = {};
+    if (usr) {
+        user = JSON.parse(usr);
+    } else {
+        microblog = req.param('microblog');
+        acc_token = req.param('acc_token');
+        user.access_token=acc_token;
+        user.blogtype = microblog;
+    }
+
+    status = req.param('status');
+    if (!status) {
+        status = url;
+    }
+    force = req.param('force');
+    if (!force) {
+        force=true;
+    }
+
+    wbShot.shot2SNS(url,user,status,force, function(err, rst){
+        if (err) {
+            res.send(400, JSON.stringify(err));
+            throw err;
+        }
+        res.send(200, rst);
+    });
 });
 
 
