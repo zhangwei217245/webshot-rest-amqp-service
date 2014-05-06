@@ -1,0 +1,7 @@
+.git*
+.settings/
+.project
+node_modules
+*.log
+*.pid
+.idea/
